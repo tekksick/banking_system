@@ -18,26 +18,26 @@ void line() {
 }
 void start ();
 
-void action (user x) {
+void action (user *x) {
     int k;
     double amt;
     line();
-    cout << "Hello " <<x.Name << "!" <<endl;
+    cout << "Hello " <<x->Name << "!" <<endl;
     cout << "Press the corresponding serial number\n";
     cout << "1. Deposit\n" << "2. Withdrawl\n" << "3. Check balance\n" << "4. Transfer" <<endl ;
     cin >> k;
     if (k==1) {      //deposit
         cout << "Enter amount :";
         cin >> amt;
-        x.balance+=amt;
-        cout << "Successfully deposited " << amt << endl << "Currently your balance is " << x.balance << endl;
+        x->balance+=amt;
+        cout << "Successfully deposited " << amt << endl << "Currently your balance is " << x->balance << endl;
         start();
     }
     if (k==2) {      //withdrawl
         cout << "Enter amount :";
         cin >> amt;
-        if(x.balance>=amt) {
-            x.balance-=amt;
+        if(x->balance>=amt) {
+            x->balance-=amt;
             cout << "Successfully withdrawn " << amt << endl;
             start();
         }
@@ -47,7 +47,7 @@ void action (user x) {
         }
     }
     if (k==3) {      //check balance
-        cout << "Your account currently has " << x.balance <<endl;
+        cout << "Your account currently has " << x->balance <<endl;
         start();
     }
     if (k==4) {       //transfer
@@ -60,7 +60,7 @@ void action (user x) {
                 found=1;
                 cout << "Enter the amount :";
                 cin >> amt;
-                x.balance-=amt;
+                x->balance-=amt;
                 u.ID+=amt;
                 cout <<amt << " has been successfully transfered to " << u.ID <<" ; " << u.Name <<endl ;
                 start();
@@ -119,7 +119,7 @@ void login () {
             cin >> pwd;
             if(pwd==accs[k].PWD) {
                 cout <<accs[k].Name << ", your login is successful" <<endl;
-                action (accs[k]);
+                action (&accs[k]);
             }
             else {
                 cout << "Your password is incorrect" << endl;
